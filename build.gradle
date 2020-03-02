@@ -63,6 +63,7 @@ subprojects {
         springCloudVersion = "2.2.0.RELEASE"
         springBootVersion = "2.2.1.RELEASE"
         junitVersion = "5.2.0"
+        gsonVersion = "2.8.6"
     }
 
     /* 添加通用依赖 */
@@ -72,7 +73,7 @@ subprojects {
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
         compile(
-                'com.google.code.gson:gson:2.8.6'
+                "com.google.code.gson:gson:${gsonVersion}"
         )
 
         testCompile(

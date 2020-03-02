@@ -5,6 +5,7 @@ dependencies {
     compile(
             "org.springframework.cloud:spring-cloud-starter-config:${springCloudVersion}",
             "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+            "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springCloudVersion}",
             "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
     )
 }

@@ -1,9 +1,9 @@
-archivesBaseName = 'spring-cloud-config-server'
-
+archivesBaseName = 'spring-cloud-eureka'
 
 dependencies {
     compile(
-            "org.springframework.cloud:spring-cloud-config-server:${springCloudVersion}",
             "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:${springCloudVersion}"
     )
 }
+
+
