@@ -1,0 +1,91 @@
+buildscript {
+    ext {
+        springBootVersion = "2.2.1.RELEASE"
+    }
+
+    repositories {
+        mavenLocal()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath(
+                "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+        )
+    }
+}
+
+
+/* 所有子项目的通用配置 */
+subprojects {
+
+    /* 使用二进制插件 */
+    apply plugin: 'java' /* java是Gradle的核心插件，是内置的，内置插件不需要配置依赖路径 */
+    apply plugin: 'idea' /* 同上  让Gradle自动生成Intellij的项目文件*/
+    /* 注意gradle插件不再自动应用，所以这里需要指定 */
+    apply plugin: 'org.springframework.boot'
+    /* 依赖管理插件仍然是一个spring-boot-gradle-plugin传递依赖，所以无需在build.gradle配置中明确列出此依赖。 */
+    apply plugin: 'io.spring.dependency-management' /* 依赖管理，用来传递spring的依赖 */
+
+    group 'org.young'
+    version '1.0.0-SNAPSHOT'
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    configurations.all {
+        //每隔24小时检查远程依赖是否存在更新
+        //resolutionStrategy.cacheChangingModulesFor 24, 'hours'
+        //每隔10分钟..
+        resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
+        // 采用动态版本声明的依赖缓存10分钟
+        resolutionStrategy.cacheDynamicVersionsFor 10 * 60, 'seconds'
+    }
+
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:Hoxton.RELEASE"
+        }
+    }
+
+    ext {
+        lombokVersion = "1.18.12"
+        springCloudVersion = "2.2.0.RELEASE"
+        springBootVersion = "2.2.1.RELEASE"
+        junitVersion = "5.2.0"
+    }
+
+    /* 添加通用依赖 */
+    dependencies {
+
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+        compile(
+                'com.google.code.gson:gson:2.8.6'
+        )
+
+        testCompile(
+                "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+
+        )
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
+    }
+
+}
+
+
+

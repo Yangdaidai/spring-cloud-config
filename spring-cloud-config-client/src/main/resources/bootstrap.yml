@@ -1,0 +1,19 @@
+server:
+  port: 8011
+
+spring:
+  application:
+    name: spring-cloud-config-client
+
+  cloud:
+    config:
+      label: master # 配置仓库的分支
+      name: config
+      profile: dev
+      uri:  http://localhost:8010
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
