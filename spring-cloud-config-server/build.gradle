@@ -1,5 +1,6 @@
 archivesBaseName = 'spring-cloud-config-server'
 
+test.enabled = false
 
 dependencies {
     compile(

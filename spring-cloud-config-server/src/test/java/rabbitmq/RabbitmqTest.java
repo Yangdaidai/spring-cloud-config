@@ -23,7 +23,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  **/
 @RunWith(SpringRunner.class)    // 固定写法
 @SpringBootTest(classes = ConfigServerApplication.class)    // SpringBoot启动类（自定义的）
-@Ignore
 public class RabbitmqTest {
 
     @Autowired
@@ -34,10 +33,10 @@ public class RabbitmqTest {
 
     // 发送一条点对点（Direct）的消息，又称为直连
     @Test
-    public void sendQueue(){
+    public void sendQueue() {
         System.out.println("开始向队列中发送一条消息！");
         // 参数1：管理中的队列名  参数2：发送的消息
-        rabbitTemplate.convertAndSend(QUEUE_NAME,"message:这是一条消息！");
+        rabbitTemplate.convertAndSend(QUEUE_NAME, "message:这是一条消息！");
         System.out.println("消息发送完毕！");
     }
 
