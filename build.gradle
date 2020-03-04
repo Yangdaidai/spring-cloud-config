@@ -62,7 +62,7 @@ subprojects {
         lombokVersion = "1.18.12"
         springCloudVersion = "2.2.0.RELEASE"
         springBootVersion = "2.2.1.RELEASE"
-        junitVersion = "5.2.0"
+        junitVersion = "5.5.2"
         gsonVersion = "2.8.6"
     }
 
@@ -76,13 +76,12 @@ subprojects {
                 "com.google.code.gson:gson:${gsonVersion}"
         )
 
-        testCompile(
-                "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 
+        testImplementation(
+                "org.springframework.boot:spring-boot-starter-test",
+                'org.junit.jupiter:junit-jupiter-api'
         )
-
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
-
 
     }
 
