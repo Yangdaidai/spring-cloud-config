@@ -1,9 +1,27 @@
+
 server:
   port: 8011
+spring:
+  profiles: node1	# 切换配置
+---
+
+server:
+  port: 8012
+spring:
+  profiles: node2
+---
+
+
 
 spring:
   application:
     name: spring-cloud-config-client
+  rabbitmq:
+    virtual-host: my_vhost
+    host: 192.168.0.103
+    port: 5672
+    username: admin
+    password: admin
   cloud:
     config:
       label: master # 配置仓库的分支
@@ -12,13 +30,16 @@ spring:
       discovery:
         enabled: true
         service-id: spring-cloud-config-server
+    bus:
+      trace:
+        enabled: true     #开启消息跟踪
 
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: "*"
 
 eureka:
   client:

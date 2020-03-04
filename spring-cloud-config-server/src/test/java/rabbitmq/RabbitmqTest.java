@@ -2,6 +2,7 @@ package rabbitmq;
 
 import com.young.config.server.ConfigServerApplication;
 import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -22,16 +23,16 @@ import org.springframework.test.context.junit4.SpringRunner;
  **/
 @RunWith(SpringRunner.class)    // 固定写法
 @SpringBootTest(classes = ConfigServerApplication.class)    // SpringBoot启动类（自定义的）
+@Ignore
 public class RabbitmqTest {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;  // 注入一个RabbitMQ的模板对象，操作消息队列的对象
 
 
-    private final static String QUEUE_NAME = "Hello";
+    private final static String QUEUE_NAME = "hello";
 
     // 发送一条点对点（Direct）的消息，又称为直连
-    @Ignore
     @Test
     public void sendQueue(){
         System.out.println("开始向队列中发送一条消息！");
