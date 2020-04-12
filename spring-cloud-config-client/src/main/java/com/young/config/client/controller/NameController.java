@@ -23,8 +23,17 @@ public class NameController {
     @Value("${config.name}")
     private String name;
 
+    @Value("${client.spring-cloud-config-client.appNme}")
+    private String appName;
+
     @RequestMapping("/name")
     public String name() {
         return this.name;
+    }
+
+    @RequestMapping("/appName")
+    public String appName() {
+        System.out.println("appName = " + appName);
+        return this.appName;
     }
 }
